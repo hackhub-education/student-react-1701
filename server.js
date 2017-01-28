@@ -15,7 +15,7 @@ var studentSchema = {
 var Student = mongoose.model('Student', studentSchema, 'students');
 
 var app = express();
-app.use('/public', express.static('public'));
+app.use('/static', express.static('public'));
 
 app.use(cors());
 app.use(bodyParser.json());
