@@ -38,22 +38,33 @@ var Student = React.createClass({
 
     },
 
+    handleSave: function() {
+
+        axios.post('http://localhost:3000/students/update/', this.state.student)
+            .then(function(response) {
+                console.log(response.data);
+            })
+            .catch(function(err) {
+                console.log(err);
+            })
+
+    },
+
     render: function() {
 
         var ReactThis = this;
 
         var updateForm = function() {
-            if (ReactThis.state.showUpdate) {
+            if (ReactThis.state.showUpdate)
                 return (
-                    <form>
+                    <div>
                         <input name="lastname" onChange={ReactThis.handleChange} value={ReactThis.state.student.lastname}/>
                         <input name="age" onChange={ReactThis.handleChange} value={ReactThis.state.student.age}/>
                         <input name="school" onChange={ReactThis.handleChange} value={ReactThis.state.student.school}/>
-                    </form>
+                        <button onClick={ReactThis.handleSave}>Save</button>
+                    </div>
                 )
-            } else {
-                return <div>No Data</div>
-            }
+
         };
 
         return (

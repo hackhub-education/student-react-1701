@@ -64,10 +64,10 @@ app.post('/students/update/', function (req, res) {
     var body = req.body;
     if (!(
             body.hasOwnProperty('_id') &&
-            body.hasOwnProperty('firstName') &&
-            body.hasOwnProperty('lastName') &&
+            body.hasOwnProperty('firstname') &&
+            body.hasOwnProperty('lastname') &&
             body.hasOwnProperty('age') &&
-            body.hasOwnProperty('isEnrolled')
+            body.hasOwnProperty('school')
         )) {
         return res.status(400);
     }
