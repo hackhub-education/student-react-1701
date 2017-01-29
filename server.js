@@ -6,9 +6,10 @@ var bodyParser = require('body-parser');
 mongoose.connect('mongodb://localhost/webdxd');
 
 var studentSchema = {
-    firstName: String,
-    lastName: String,
+    firstname: String,
+    lastname: String,
     age: Number,
+    school: String,
     isEnrolled: Boolean
 };
 
@@ -28,7 +29,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/students', function(req, res) {
-    Student.find().exec(function(err, doc) {
+    Student.find().select('_id firstname').exec(function(err, doc) {
         res.send(doc);
     });
 });
