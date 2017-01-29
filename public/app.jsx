@@ -5,7 +5,8 @@ var Student = React.createClass({
             student: {
                 firstname: this.props.student.firstname,
                 _id: this.props.student._id
-            }
+            },
+            showUpdate: false
         }
     },
 
@@ -14,7 +15,8 @@ var Student = React.createClass({
         axios.get('http://localhost:3000/students/' + this.props.student._id)
             .then(function(response) {
                 ReactThis.setState({
-                    student: response.data
+                    student: response.data,
+                    showUpdate: true
                 })
             })
             .catch(function(err) {
@@ -23,13 +25,41 @@ var Student = React.createClass({
 
     },
 
+    handleChange: function(event) {
+
+        var studentObj = this.state.student;
+
+        studentObj[event.target.name] = event.target.value;
+
+        this.setState({
+            student: studentObj
+        })
+
+
+    },
+
     render: function() {
+
+        var ReactThis = this;
+
+        var updateForm = function() {
+            if (ReactThis.state.showUpdate) {
+                return (
+                    <form>
+                        <input name="lastname" onChange={ReactThis.handleChange} value={ReactThis.state.student.lastname}/>
+                        <input name="age" onChange={ReactThis.handleChange} value={ReactThis.state.student.age}/>
+                        <input name="school" onChange={ReactThis.handleChange} value={ReactThis.state.student.school}/>
+                    </form>
+                )
+            } else {
+                return <div>No Data</div>
+            }
+        };
+
         return (
             <div>
-                <p onClick={this.handleClick}>{this.props.student.firstname}</p>
-                <p>{this.state.student.lastname}</p>
-                <p>{this.state.student.age}</p>
-                <p>{this.state.student.school}</p>
+                <h3 onClick={this.handleClick}>{this.props.student.firstname}</h3>
+                {updateForm()}
             </div>
         )
     }
@@ -40,9 +70,9 @@ var Student = React.createClass({
 var StudentList = React.createClass({
 
     getInitialState: function() {
-        return ({
+        return {
             studentlist: []
-        })
+        }
     },
 
     componentWillMount: function() {
