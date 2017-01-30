@@ -58,10 +58,20 @@ var Student = React.createClass({
             if (ReactThis.state.showUpdate)
                 return (
                     <div>
-                        <input name="lastname" onChange={ReactThis.handleChange} value={ReactThis.state.student.lastname}/>
-                        <input name="age" onChange={ReactThis.handleChange} value={ReactThis.state.student.age}/>
-                        <input name="school" onChange={ReactThis.handleChange} value={ReactThis.state.student.school}/>
-                        <button onClick={ReactThis.handleSave}>Save</button>
+                        <div className="form-group">
+                            <input className="form-control" name="lastname" onChange={ReactThis.handleChange} value={ReactThis.state.student.lastname}/>
+
+                        </div>
+                        <div className="form-group">
+                            <input className="form-control" name="age" onChange={ReactThis.handleChange} value={ReactThis.state.student.age}/>
+
+                        </div>
+                        <div className="form-group">
+                            <input className="form-control" name="school" onChange={ReactThis.handleChange} value={ReactThis.state.student.school}/>
+
+                        </div>
+                        <button className="btn btn-info pull-right" onClick={ReactThis.handleSave}>Save</button>
+                        <div className="clearfix"></div>
                     </div>
                 )
 
@@ -104,7 +114,7 @@ var StudentList = React.createClass({
 
     render: function() {
         return (
-            <div>
+            <div className="container">
                 { this.state.studentlist.map(function(student) {
                 return <Student student={student} key={student._id}/>
             }) }
